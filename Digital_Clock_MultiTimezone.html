@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Timezone Clock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #282c34;
+            color: white;
+        }
+        .clock {
+            font-size: 2em;
+            margin: 20px;
+        }
+        .toggle-button {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            background: #61dafb;
+            cursor: pointer;
+        }
+        @media (max-width: 600px) {
+            .clock {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Digital Multi-Timezone Clock</h1>
+    <div id="clocks"></div>
+    <button class="toggle-button" onclick="toggleTimeFormat()">Switch to 24-hour format</button>
+    <button class="toggle-button" onclick="goFullscreen()">Fullscreen</button>
+
+    <script>
+        let use24HourFormat = false;
+        const timezones = {
+            ‘IST’: 5.5,
+            ‘UTC’: 0,
+            ‘EST’: -5,
+            ‘PST’: -8,
+            ‘GMT’: 0,
+            ‘JST’: 9
+        };
+
+        function updateClocks() {
+            const now = new Date();
+            const clocksDiv = document.getElementById('clocks');
+            clocksDiv.innerHTML = '';
+            for (const [timezone, offset] of Object.entries(timezones)) {
+                const utcTime = new Date(now.getTime() + offset * 3600000);
+                const formattedTime = formatTime(utcTime);
+                clocksDiv.innerHTML += `<div class='clock'>${timezone}: ${formattedTime}</div>`;
+            }
+        }
+
+        function formatTime(date) {
+            let hours = date.getUTCHours();
+            let minutes = date.getUTCMinutes();
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            if (use24HourFormat) {
+                return hours + ':' + minutes;
+            } else {
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12;
+                hours = hours ? hours : 12; // the hour ‘0’ should be ‘12’
+                return hours + ':' + minutes + ' ' + ampm;
+            }
+        }
+
+        function toggleTimeFormat() {
+            use24HourFormat = !use24HourFormat;
+            updateClocks();
+            const button = document.querySelector('.toggle-button');
+            button.textContent = use24HourFormat ? 'Switch to 12-hour format' : 'Switch to 24-hour format';
+        }
+
+        function goFullscreen() {
+            if (document.body.requestFullscreen) {
+                document.body.requestFullscreen();
+            }
+        }
+
+        setInterval(updateClocks, 1000);
+        updateClocks();
+    </script>
+</body>
+</html>
