@@ -1,0 +1,25 @@
+# Gantt Chart for Project Timeline
+
+## Project Gantt Chart
+
+### Phases
+1. **Development**: Jan 1 - Mar 13, 2026 (71 days)
+2. **IST Readiness/Handover**: Mar 16 - Mar 27, 2026 (12 days)
+3. **Functional/Interface/UAT Readiness**: Mar 28 - Apr 24, 2026 (28 days)
+4. **UAT**: Apr 27 - May 22, 2026 (26 days)
+5. **PROD Readiness**: May 23 - May 29, 2026 (7 days)
+6. **Data Migration & Deployment**: May 30 - May 31, 2026 (2 days)
+
+### Milestones
+- Development complete by Mar 13, 2026.
+- IST Readiness by Mar 27, 2026.
+- UAT completion by May 22, 2026.
+
+### Progress Tracking
+- Track the percentage completion of each phase and visualize it on the Gantt chart.
+
+## Timeline Details
+- The chart visually represents the start and end date of each phase with progress color-coded to show current status of tasks.
+
+## Conclusion
+- The Gantt chart serves as a project management tool to track phases and deadlines in the project timeline.
